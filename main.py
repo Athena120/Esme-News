@@ -35,6 +35,7 @@ gravatar = Gravatar(app,
                     use_ssl=False,
                     base_url=None)
 SITE_TITLE = "Esme's News"
+SUBTITLE = ""
 
 
 def is_safe_url(target):
@@ -138,7 +139,7 @@ def admin_only(function):
 @app.route('/')
 def get_all_posts():
     posts = BlogPost.query.all()
-    return render_template("index.html", all_posts=posts, title=SITE_TITLE)
+    return render_template("index.html", all_posts=posts, title=SITE_TITLE, subtitle=SUBTITLE)
 
 
 @app.route('/register', methods=["GET", "POST"])
