@@ -21,7 +21,7 @@ Base = declarative_base()
 login_manager = LoginManager()
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = "2l07qgh75903nbkcee"
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "18jdlb9igiqo3j")
 ckeditor = CKEditor(app)
 Bootstrap4(app)
 login_manager.init_app(app)
@@ -34,8 +34,8 @@ gravatar = Gravatar(app,
                     force_lower=False,
                     use_ssl=False,
                     base_url=None)
-SITE_TITLE = "Esme's News"
-SUBTITLE = ""
+SITE_TITLE = "Esme's Blog"
+SUBTITLE = "A collection of Esme's best writings."
 
 
 def is_safe_url(target):
@@ -65,7 +65,7 @@ def strip_invalid_html(content):
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///blog.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",  "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ex_user_login = False
